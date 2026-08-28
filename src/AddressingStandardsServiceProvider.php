@@ -3,7 +3,7 @@
 namespace Cdburgess\AddressingStandards;
 
 use Illuminate\Support\ServiceProvider;
-use Cdburgess\AddressingStandards\Contracts\AddressNormalizerInterface;
+use Cdburgess\AddressingStandards\Contracts\AddressNormalizer;
 use Cdburgess\AddressingStandards\Services\AddressNormalizer;
 
 class AddressingStandardsServiceProvider extends ServiceProvider
@@ -15,8 +15,8 @@ class AddressingStandardsServiceProvider extends ServiceProvider
             'addressing-standards'
         );
 
-        $this->app->singleton(AddressNormalizerInterface::class, AddressNormalizer::class);
-        $this->app->alias(AddressNormalizerInterface::class, 'address.normalizer');
+        $this->app->singleton(AddressNormalizer::class, AddressNormalizer::class);
+        $this->app->alias(AddressNormalizer::class, 'address.normalizer');
     }
 
     public function boot(): void

@@ -37,9 +37,9 @@ echo $address->toBlock();
 ### Using the Container
 
 ```php
-use Cdburgess\AddressingStandards\Contracts\AddressNormalizerInterface;
+use Cdburgess\AddressingStandards\Contracts\AddressNormalizer;
 
-$normalizer = app(AddressNormalizerInterface::class);
+$normalizer = app(AddressNormalizer::class);
 $address = $normalizer->normalize([...]);
 ```
 
@@ -64,20 +64,47 @@ The returned `Address` is immutable and provides:
 | `lastLine()` | City + State + ZIP(+4) |
 | `toBlock()` | Multi-line mailpiece block |
 | `toString()` / `__toString()` | Single-line representation |
-| `toArray()` | All components as an array |
-| `isComplete()` | Has street + city + state + ZIP5 |
+| `toArray()` | All components, corrections, and completeness |
+| `isComplete()` | Has delivery line + city + state + ZIP5 |
 | `hasIncompleteSecondary()` | Designator present but required number missing |
 | `isFullyQualified()` | Complete and no secondary problems |
+| `wasCorrected()` | One or more standardization changes were applied |
+| `completenessReport()` | Missing fields and correction list |
+| `corrections` | Array of `{field, from, to}` changes |
+
+### Completeness report
+
+```php
+$report = $address->completenessReport();
+
+// [
+//     'is_complete' => true,
+//     'is_fully_qualified' => true,
+//     'has_incomplete_secondary' => false,
+//     'missing' => [],
+//     'corrections' => [
+//         ['field' => 'state', 'from' => 'Virginia', 'to' => 'VA'],
+//     ],
+// ]
+```
 
 ## What gets standardized
 
 - Street suffixes to official USPS abbreviations (`STREET` to `ST`, `AVENUE` to `AVE`, and so on)
 - Directionals to `N`, `S`, `E`, `W`, `NE`, `NW`, `SE`, `SW`
-- Secondary units to `APT`, `STE`, `BLDG`, `FL`, and related designators (including rules for designators that do not require a number)
-- State names to two-letter codes
+- Secondary units to `APT`, `STE`, `BLDG`, `FL`, and related designators
+- Secondary units that do not require a number (`BSMT`, `PH`, `FRNT`, and similar)
+- Fallback `# 12` when a number is present but no recognized designator is
+- State names to two-letter codes, including full names such as `Virginia`
 - Uppercase formatting (Publication 28 preference)
-- PO BOX, Rural Route, and basic Highway Contract patterns
 - ZIP and ZIP+4 normalization
+- PO Box
+- Dual addresses on one line (street + PO Box → PO Box is used)
+- Rural Route and Highway Contract, including obsolete `RFD` and `STAR ROUTE`
+- General Delivery
+- Puerto Rico urbanization (`URB LAS GLADIOLAS`)
+- Alphanumeric and fractional primary numbers (`123A`, `123 1/2`)
+- Two-suffix streets (`MAIN AVENUE DRIVE` → street `MAIN AVENUE`, suffix `DR`)
 
 ## Testing
 

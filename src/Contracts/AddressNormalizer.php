@@ -4,7 +4,7 @@ namespace Cdburgess\AddressingStandards\Contracts;
 
 use Cdburgess\AddressingStandards\Address;
 
-interface AddressNormalizerInterface
+interface AddressNormalizer
 {
     /**
      * Accept almost any human-entered address form and return a

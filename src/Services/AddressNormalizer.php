@@ -3,7 +3,7 @@
 namespace Cdburgess\AddressingStandards\Services;
 
 use Cdburgess\AddressingStandards\Address;
-use Cdburgess\AddressingStandards\Contracts\AddressNormalizerInterface;
+use Cdburgess\AddressingStandards\Contracts\AddressNormalizer;
 use Cdburgess\AddressingStandards\Handlers\SecondaryUnitHandler;
 use Cdburgess\AddressingStandards\Parsers\LastLineParser;
 use Cdburgess\AddressingStandards\Parsers\StreetAddressParser;
@@ -12,7 +12,7 @@ use Cdburgess\AddressingStandards\Tables\Directionals;
 use Cdburgess\AddressingStandards\Tables\States;
 use Cdburgess\AddressingStandards\Tables\StreetSuffixes;
 
-class AddressNormalizer implements AddressNormalizerInterface
+class AddressNormalizer implements AddressNormalizer
 {
     public function __construct(
         protected StreetAddressParser $streetParser = new StreetAddressParser(),
