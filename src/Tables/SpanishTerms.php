@@ -9,6 +9,7 @@ class SpanishTerms
     /**
      * Common Spanish address terms used in Puerto Rico (Pub 28 Appendix H / §294).
      * These are often kept as-is or lightly abbreviated on the mailpiece.
+     *
      * @link https://pe.usps.com/text/pub28/28aph.htm
      */
     public static function all(): array

@@ -4,7 +4,7 @@ use Cdburgess\AddressingStandards\Address;
 use Cdburgess\AddressingStandards\Services\AddressNormalizer;
 
 it('normalizes a simple street address', function () {
-    $normalizer = new AddressNormalizer();
+    $normalizer = new AddressNormalizer;
 
     $address = $normalizer->normalize(
         "123 South Main Street Apt 4B\nSpringfield VA 22162"
@@ -25,7 +25,7 @@ it('normalizes a simple street address', function () {
 });
 
 it('normalizes a po box address', function () {
-    $normalizer = new AddressNormalizer();
+    $normalizer = new AddressNormalizer;
 
     $address = $normalizer->normalize("PO Box 1234\nSpringfield VA 22162");
 
@@ -35,7 +35,7 @@ it('normalizes a po box address', function () {
 });
 
 it('reports completeness and corrections', function () {
-    $normalizer = new AddressNormalizer();
+    $normalizer = new AddressNormalizer;
 
     $address = $normalizer->normalize(
         "123 south main street apartment 4b\nspringfield virginia 22162-1010"
@@ -49,7 +49,7 @@ it('reports completeness and corrections', function () {
 });
 
 it('flags an incomplete secondary unit', function () {
-    $normalizer = new AddressNormalizer();
+    $normalizer = new AddressNormalizer;
 
     $address = $normalizer->normalize([
         'street_line' => '123 Main Street Apt',

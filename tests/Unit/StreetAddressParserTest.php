@@ -3,7 +3,7 @@
 use Cdburgess\AddressingStandards\Parsers\StreetAddressParser;
 
 it('parses a standard street with directional, suffix, and unit', function () {
-    $parser = new StreetAddressParser();
+    $parser = new StreetAddressParser;
     $result = $parser->parse('123 SOUTH MAIN STREET APT 4B');
 
     expect($result['primaryNumber'])->toBe('123');
@@ -15,7 +15,7 @@ it('parses a standard street with directional, suffix, and unit', function () {
 });
 
 it('uses the po box when a dual address is on one line', function () {
-    $parser = new StreetAddressParser();
+    $parser = new StreetAddressParser;
     $result = $parser->parse('1145 RIVER DR PO BOX 195');
 
     expect($result['streetName'])->toBe('PO BOX');
@@ -23,7 +23,7 @@ it('uses the po box when a dual address is on one line', function () {
 });
 
 it('parses rural routes and drops obsolete rfd labels', function () {
-    $parser = new StreetAddressParser();
+    $parser = new StreetAddressParser;
     $result = $parser->parse('RFD 2 BOX 88');
 
     expect($result['streetName'])->toBe('RR 2');
@@ -32,14 +32,14 @@ it('parses rural routes and drops obsolete rfd labels', function () {
 });
 
 it('parses highway contract and star route as hc', function () {
-    $parser = new StreetAddressParser();
+    $parser = new StreetAddressParser;
 
     expect($parser->parse('HC 1 BOX 12')['streetName'])->toBe('HC 1');
     expect($parser->parse('STAR ROUTE 3 BOX 9')['streetName'])->toBe('HC 3');
 });
 
 it('parses puerto rico urbanization and remaining street', function () {
-    $parser = new StreetAddressParser();
+    $parser = new StreetAddressParser;
     $result = $parser->parse('URB LAS GLADIOLAS 150 CALLE A');
 
     expect($result['urbanization'])->toBe('URB LAS GLADIOLAS');
@@ -48,21 +48,21 @@ it('parses puerto rico urbanization and remaining street', function () {
 });
 
 it('parses general delivery', function () {
-    $parser = new StreetAddressParser();
+    $parser = new StreetAddressParser;
     $result = $parser->parse('GENERAL DELIVERY');
 
     expect($result['streetName'])->toBe('GENERAL DELIVERY');
 });
 
 it('parses alphanumeric and fractional primary numbers', function () {
-    $parser = new StreetAddressParser();
+    $parser = new StreetAddressParser;
 
     expect($parser->parse('123A MAIN ST')['primaryNumber'])->toBe('123A');
     expect($parser->parse('123 1/2 MAIN ST')['primaryNumber'])->toBe('123 1/2');
 });
 
 it('treats the second of two suffixes as the suffix field', function () {
-    $parser = new StreetAddressParser();
+    $parser = new StreetAddressParser;
     $result = $parser->parse('789 MAIN AVENUE DRIVE');
 
     expect($result['streetName'])->toBe('MAIN AVENUE');
@@ -70,7 +70,7 @@ it('treats the second of two suffixes as the suffix field', function () {
 });
 
 it('parses a utah grid address with two directionals', function () {
-    $parser = new StreetAddressParser();
+    $parser = new StreetAddressParser;
     $result = $parser->parse('80 SOUTH 800 EAST');
 
     expect($result['primaryNumber'])->toBe('80');
@@ -81,7 +81,7 @@ it('parses a utah grid address with two directionals', function () {
 });
 
 it('parses a compact utah grid address', function () {
-    $parser = new StreetAddressParser();
+    $parser = new StreetAddressParser;
     $result = $parser->parse('842 E 1700 S');
 
     expect($result['primaryNumber'])->toBe('842');

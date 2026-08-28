@@ -37,7 +37,7 @@ readonly class Address
             }
         }
 
-        return (new AddressNormalizer())->normalize($input);
+        return (new AddressNormalizer)->normalize($input);
     }
 
     public function with(array $attributes): self
@@ -82,7 +82,7 @@ readonly class Address
         $zip = $this->zip5;
 
         if ($this->zip4) {
-            $zip .= '-' . $this->zip4;
+            $zip .= '-'.$this->zip4;
         }
 
         $parts = array_filter([
@@ -153,7 +153,7 @@ readonly class Address
             return false;
         }
 
-        return (new SecondaryUnitHandler())->isIncomplete(
+        return (new SecondaryUnitHandler)->isIncomplete(
             $this->secondaryDesignator,
             $this->secondaryNumber
         );

@@ -92,12 +92,12 @@ class StreetAddressParser
 
         if (preg_match('/^(.+?)\s+(\d+[A-Z]?\b.*)$/i', $rest, $parts)) {
             return [
-                'URB ' . strtoupper(trim($parts[1])),
+                'URB '.strtoupper(trim($parts[1])),
                 trim($parts[2]),
             ];
         }
 
-        return ['URB ' . strtoupper($rest), ''];
+        return ['URB '.strtoupper($rest), ''];
     }
 
     protected function isGeneralDelivery(string $line): bool
@@ -153,7 +153,7 @@ class StreetAddressParser
 
         if (preg_match('/^(RR|HC)\s*0*(\d+)\s*(?:BOX\s*#?\s*([A-Z0-9\-]+))?/i', $normalized, $match)) {
             $result = [
-                'streetName' => strtoupper($match[1]) . ' ' . $match[2],
+                'streetName' => strtoupper($match[1]).' '.$match[2],
             ];
 
             if (! empty($match[3])) {
@@ -181,7 +181,7 @@ class StreetAddressParser
             $result['primaryNumber'] = strtoupper(array_shift($tokens));
 
             if (isset($tokens[0]) && preg_match('/^\d+\/\d+$/', $tokens[0])) {
-                $result['primaryNumber'] .= ' ' . array_shift($tokens);
+                $result['primaryNumber'] .= ' '.array_shift($tokens);
             }
         }
 
