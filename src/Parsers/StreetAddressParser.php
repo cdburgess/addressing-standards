@@ -25,6 +25,7 @@ class StreetAddressParser
                 $this->isGeneralDelivery($line) => [
                     'streetName' => 'GENERAL DELIVERY',
                 ],
+                $this->isGridAddress($line) => $this->parseGridAddress($line),
                 $this->isDualAddress($line) => $this->parsePoBox(
                     $this->extractPoBoxPortion($line) ?? $line
                 ),
@@ -50,6 +51,34 @@ class StreetAddressParser
             'secondaryDesignator' => null,
             'secondaryNumber' => null,
             'urbanization' => null,
+        ];
+    }
+
+    /**
+     * Pub 28 Appendix D2 — Utah / Salt Lake grid with two directionals.
+     * Example: 842 E 1700 S, 80 SOUTH 800 EAST
+     */
+    protected function isGridAddress(string $line): bool
+    {
+        return (bool) preg_match(
+            '/^\d+[A-Z]?\s+(NORTH|SOUTH|EAST|WEST|N|S|E|W|NE|NW|SE|SW)\s+\d+[A-Z]?\s+(NORTH|SOUTH|EAST|WEST|N|S|E|W|NE|NW|SE|SW)$/i',
+            trim($line)
+        );
+    }
+
+    protected function parseGridAddress(string $line): array
+    {
+        preg_match(
+            '/^(\d+[A-Z]?)\s+(NORTH|SOUTH|EAST|WEST|N|S|E|W|NE|NW|SE|SW)\s+(\d+[A-Z]?)\s+(NORTH|SOUTH|EAST|WEST|N|S|E|W|NE|NW|SE|SW)$/i',
+            trim($line),
+            $match
+        );
+
+        return [
+            'primaryNumber' => strtoupper($match[1]),
+            'preDirectional' => Directionals::standardize($match[2]),
+            'streetName' => strtoupper($match[3]),
+            'postDirectional' => Directionals::standardize($match[4]),
         ];
     }
 

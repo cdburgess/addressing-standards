@@ -68,3 +68,24 @@ it('treats the second of two suffixes as the suffix field', function () {
     expect($result['streetName'])->toBe('MAIN AVENUE');
     expect($result['suffix'])->toBe('DR');
 });
+
+it('parses a utah grid address with two directionals', function () {
+    $parser = new StreetAddressParser();
+    $result = $parser->parse('80 SOUTH 800 EAST');
+
+    expect($result['primaryNumber'])->toBe('80');
+    expect($result['preDirectional'])->toBe('S');
+    expect($result['streetName'])->toBe('800');
+    expect($result['suffix'])->toBeNull();
+    expect($result['postDirectional'])->toBe('E');
+});
+
+it('parses a compact utah grid address', function () {
+    $parser = new StreetAddressParser();
+    $result = $parser->parse('842 E 1700 S');
+
+    expect($result['primaryNumber'])->toBe('842');
+    expect($result['preDirectional'])->toBe('E');
+    expect($result['streetName'])->toBe('1700');
+    expect($result['postDirectional'])->toBe('S');
+});

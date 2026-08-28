@@ -43,22 +43,22 @@ readonly class Address
     public function with(array $attributes): self
     {
         return new self(
-            recipient: $attributes['recipient'] ?? $this->recipient,
-            firm: $attributes['firm'] ?? $this->firm,
-            primaryNumber: $attributes['primaryNumber'] ?? $this->primaryNumber,
-            preDirectional: $attributes['preDirectional'] ?? $this->preDirectional,
-            streetName: $attributes['streetName'] ?? $this->streetName,
-            suffix: $attributes['suffix'] ?? $this->suffix,
-            postDirectional: $attributes['postDirectional'] ?? $this->postDirectional,
-            secondaryDesignator: $attributes['secondaryDesignator'] ?? $this->secondaryDesignator,
-            secondaryNumber: $attributes['secondaryNumber'] ?? $this->secondaryNumber,
-            urbanization: $attributes['urbanization'] ?? $this->urbanization,
-            city: $attributes['city'] ?? $this->city,
-            state: $attributes['state'] ?? $this->state,
-            zip5: $attributes['zip5'] ?? $this->zip5,
-            zip4: $attributes['zip4'] ?? $this->zip4,
-            rawInput: $attributes['rawInput'] ?? $this->rawInput,
-            corrections: $attributes['corrections'] ?? $this->corrections,
+            recipient: array_key_exists('recipient', $attributes) ? $attributes['recipient'] : $this->recipient,
+            firm: array_key_exists('firm', $attributes) ? $attributes['firm'] : $this->firm,
+            primaryNumber: array_key_exists('primaryNumber', $attributes) ? $attributes['primaryNumber'] : $this->primaryNumber,
+            preDirectional: array_key_exists('preDirectional', $attributes) ? $attributes['preDirectional'] : $this->preDirectional,
+            streetName: array_key_exists('streetName', $attributes) ? $attributes['streetName'] : $this->streetName,
+            suffix: array_key_exists('suffix', $attributes) ? $attributes['suffix'] : $this->suffix,
+            postDirectional: array_key_exists('postDirectional', $attributes) ? $attributes['postDirectional'] : $this->postDirectional,
+            secondaryDesignator: array_key_exists('secondaryDesignator', $attributes) ? $attributes['secondaryDesignator'] : $this->secondaryDesignator,
+            secondaryNumber: array_key_exists('secondaryNumber', $attributes) ? $attributes['secondaryNumber'] : $this->secondaryNumber,
+            urbanization: array_key_exists('urbanization', $attributes) ? $attributes['urbanization'] : $this->urbanization,
+            city: array_key_exists('city', $attributes) ? $attributes['city'] : $this->city,
+            state: array_key_exists('state', $attributes) ? $attributes['state'] : $this->state,
+            zip5: array_key_exists('zip5', $attributes) ? $attributes['zip5'] : $this->zip5,
+            zip4: array_key_exists('zip4', $attributes) ? $attributes['zip4'] : $this->zip4,
+            rawInput: array_key_exists('rawInput', $attributes) ? $attributes['rawInput'] : $this->rawInput,
+            corrections: array_key_exists('corrections', $attributes) ? $attributes['corrections'] : $this->corrections,
         );
     }
 
