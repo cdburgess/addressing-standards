@@ -2,28 +2,43 @@
 
 namespace Cdburgess\AddressingStandards;
 
+use Cdburgess\AddressingStandards\Contracts\AddressNormalizer as AddressNormalizerContract;
 use Cdburgess\AddressingStandards\Handlers\SecondaryUnitHandler;
+use Cdburgess\AddressingStandards\Services\AddressNormalizer;
 
-class Address
+readonly class Address
 {
     public function __construct(
-        public readonly ?string $recipient = null,
-        public readonly ?string $firm = null,
-        public readonly ?string $primaryNumber = null,
-        public readonly ?string $preDirectional = null,
-        public readonly ?string $streetName = null,
-        public readonly ?string $suffix = null,
-        public readonly ?string $postDirectional = null,
-        public readonly ?string $secondaryDesignator = null,
-        public readonly ?string $secondaryNumber = null,
-        public readonly ?string $urbanization = null,
-        public readonly ?string $city = null,
-        public readonly ?string $state = null,
-        public readonly ?string $zip5 = null,
-        public readonly ?string $zip4 = null,
-        public readonly ?string $rawInput = null,
-        public readonly array $corrections = [],
+        public ?string $recipient = null,
+        public ?string $firm = null,
+        public ?string $primaryNumber = null,
+        public ?string $preDirectional = null,
+        public ?string $streetName = null,
+        public ?string $suffix = null,
+        public ?string $postDirectional = null,
+        public ?string $secondaryDesignator = null,
+        public ?string $secondaryNumber = null,
+        public ?string $urbanization = null,
+        public ?string $city = null,
+        public ?string $state = null,
+        public ?string $zip5 = null,
+        public ?string $zip4 = null,
+        public ?string $rawInput = null,
+        public array $corrections = [],
     ) {}
+
+    public static function normalize(string|array $input): self
+    {
+        if (function_exists('app')) {
+            try {
+                return app(AddressNormalizerContract::class)->normalize($input);
+            } catch (\Throwable) {
+                // Fall through to a direct instantiation outside the container.
+            }
+        }
+
+        return (new AddressNormalizer())->normalize($input);
+    }
 
     public function with(array $attributes): self
     {

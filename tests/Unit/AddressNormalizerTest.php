@@ -1,5 +1,6 @@
 <?php
 
+use Cdburgess\AddressingStandards\Address;
 use Cdburgess\AddressingStandards\Services\AddressNormalizer;
 
 it('normalizes a simple street address', function () {
@@ -60,4 +61,11 @@ it('flags an incomplete secondary unit', function () {
     expect($address->hasIncompleteSecondary())->toBeTrue();
     expect($address->isFullyQualified())->toBeFalse();
     expect($address->completenessReport()['missing'])->toContain('secondary_number');
+});
+
+it('normalizes through the address static factory', function () {
+    $address = Address::normalize("123 main st\nspringfield va 22162");
+
+    expect($address->deliveryAddressLine())->toBe('123 MAIN ST');
+    expect($address->lastLine())->toBe('SPRINGFIELD VA 22162');
 });

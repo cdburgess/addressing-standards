@@ -23,9 +23,9 @@ php artisan vendor:publish --tag=addressing-standards-config
 ### Using the Facade
 
 ```php
-use Cdburgess\AddressingStandards\Facades\AddressingStandards;
+use Cdburgess\AddressingStandards\Address;
 
-$address = AddressingStandards::normalize(
+$address = Address::normalize(
     "123 south main street apt 4b\nspringfield va 22162"
 );
 
@@ -46,7 +46,9 @@ $address = $normalizer->normalize([...]);
 ### Array input
 
 ```php
-$address = AddressingStandards::normalize([
+use Cdburgess\AddressingStandards\Address;
+
+$address = Address::normalize([
     'street_line' => '456 North Oak Avenue Suite 200',
     'city'        => 'Richmond',
     'state'       => 'Virginia',
