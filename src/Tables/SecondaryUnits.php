@@ -12,6 +12,7 @@ class SecondaryUnits
      *
      * Note: Some designators (marked in USPS docs) do not require a following number
      * (BSMT, FRNT, LBBY, LOWR, OFC, PH, REAR, SIDE, UPPR).
+     *
      * @link https://pe.usps.com/text/pub28/28apc_003.htm
      */
     public static function all(): array
@@ -80,5 +81,4 @@ class SecondaryUnits
 
         return $std !== null && ! in_array($std, self::noNumberRequired(), true);
     }
-
 }

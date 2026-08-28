@@ -21,10 +21,10 @@ class LastLineParser
         $line = trim($line);
 
         $result = [
-            'city'  => null,
+            'city' => null,
             'state' => null,
-            'zip5'  => null,
-            'zip4'  => null,
+            'zip5' => null,
+            'zip4' => null,
         ];
 
         if ($line === '') {
@@ -38,10 +38,10 @@ class LastLineParser
             $state = States::standardize($m[2]);
 
             if ($state) {
-                $result['city']  = strtoupper(trim($m[1]));
+                $result['city'] = strtoupper(trim($m[1]));
                 $result['state'] = $state;
-                $result['zip5']  = $m[3];
-                $result['zip4']  = $m[4] ?? null;
+                $result['zip5'] = $m[3];
+                $result['zip4'] = $m[4] ?? null;
 
                 return $result;
             }
@@ -53,8 +53,8 @@ class LastLineParser
 
             if ($state) {
                 $result['state'] = $state;
-                $result['zip5']  = $m[2];
-                $result['zip4']  = $m[3] ?? null;
+                $result['zip5'] = $m[2];
+                $result['zip4'] = $m[3] ?? null;
 
                 return $result;
             }

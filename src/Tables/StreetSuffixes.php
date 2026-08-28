@@ -9,6 +9,7 @@ class StreetSuffixes
     /**
      * Street suffix abbreviations (Pub 28 Appendix C).
      * Key = any common form (uppercase), Value = official USPS standard abbreviation.
+     *
      * @link https://pe.usps.com/text/pub28/28apc_002.htm
      */
     public static function all(): array

@@ -18,7 +18,7 @@ class SecondaryUnitHandler
     public function format(?string $designator, ?string $number): ?string
     {
         $designator = $designator ? trim($designator) : null;
-        $number     = $number ? trim($number) : null;
+        $number = $number ? trim($number) : null;
 
         // Nothing to work with
         if (! $designator && ! $number) {
@@ -35,13 +35,13 @@ class SecondaryUnitHandler
             // Designators that do not require a secondary range
             if (in_array($stdDesignator, SecondaryUnits::noNumberRequired(), true)) {
                 return $number
-                    ? $stdDesignator . ' ' . $number
+                    ? $stdDesignator.' '.$number
                     : $stdDesignator;
             }
 
             // Most designators expect a number
             return $number
-                ? $stdDesignator . ' ' . $number
+                ? $stdDesignator.' '.$number
                 : $stdDesignator; // still emit the designator; caller can flag incompleteness
         }
 
@@ -50,7 +50,8 @@ class SecondaryUnitHandler
         if ($number) {
             // Clean any existing leading # the user may have typed
             $number = ltrim($number, '#');
-            return '# ' . $number;
+
+            return '# '.$number;
         }
 
         return null;

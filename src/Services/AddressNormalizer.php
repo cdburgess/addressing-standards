@@ -15,9 +15,9 @@ use Cdburgess\AddressingStandards\Tables\StreetSuffixes;
 class AddressNormalizer implements AddressNormalizerContract
 {
     public function __construct(
-        protected StreetAddressParser $streetParser = new StreetAddressParser(),
-        protected LastLineParser $lastLineParser = new LastLineParser(),
-        protected SecondaryUnitHandler $secondaryHandler = new SecondaryUnitHandler(),
+        protected StreetAddressParser $streetParser = new StreetAddressParser,
+        protected LastLineParser $lastLineParser = new LastLineParser,
+        protected SecondaryUnitHandler $secondaryHandler = new SecondaryUnitHandler,
     ) {}
 
     public function normalize(string|array $input): Address
@@ -212,7 +212,7 @@ class AddressNormalizer implements AddressNormalizerContract
 
                 $corrections[] = [
                     'field' => 'secondary',
-                    'from' => trim(($originalDesignator ?? '') . ' ' . ($originalNumber ?? '')),
+                    'from' => trim(($originalDesignator ?? '').' '.($originalNumber ?? '')),
                     'to' => $secondary,
                 ];
             } else {
@@ -234,14 +234,14 @@ class AddressNormalizer implements AddressNormalizerContract
         }
 
         if (! empty($components['zip5'])) {
-            $originalZip = $components['zip5'] . ($components['zip4'] ?? '');
+            $originalZip = $components['zip5'].($components['zip4'] ?? '');
             $zipParts = $this->lastLineParser->normalizeZip($originalZip);
 
             if (($zipParts['zip4'] ?? null) && empty($components['zip4'])) {
                 $corrections[] = [
                     'field' => 'zip',
                     'from' => $components['zip5'],
-                    'to' => $zipParts['zip5'] . '-' . $zipParts['zip4'],
+                    'to' => $zipParts['zip5'].'-'.$zipParts['zip4'],
                 ];
             }
 

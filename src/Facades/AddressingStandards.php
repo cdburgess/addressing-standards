@@ -2,8 +2,8 @@
 
 namespace Cdburgess\AddressingStandards\Facades;
 
-use Illuminate\Support\Facades\Facade;
 use Cdburgess\AddressingStandards\Contracts\AddressNormalizer;
+use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static \Cdburgess\AddressingStandards\Address normalize(string|array $input)

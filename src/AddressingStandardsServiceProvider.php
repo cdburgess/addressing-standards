@@ -2,16 +2,16 @@
 
 namespace Cdburgess\AddressingStandards;
 
+use Cdburgess\AddressingStandards\Contracts\AddressNormalizer as AddressNormalizerContract;
 use Cdburgess\AddressingStandards\Services\AddressNormalizer;
 use Illuminate\Support\ServiceProvider;
-use Cdburgess\AddressingStandards\Contracts\AddressNormalizer as AddressNormalizerContract;
 
 class AddressingStandardsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/addressing-standards.php',
+            __DIR__.'/../config/addressing-standards.php',
             'addressing-standards'
         );
 
@@ -23,7 +23,7 @@ class AddressingStandardsServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/addressing-standards.php' => config_path('addressing-standards.php'),
+                __DIR__.'/../config/addressing-standards.php' => config_path('addressing-standards.php'),
             ], 'addressing-standards-config');
         }
     }

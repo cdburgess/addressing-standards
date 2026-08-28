@@ -9,6 +9,7 @@ class States
     /**
      * Two-letter state and possession abbreviations (Pub 28 Appendix B).
      * Includes full state/possession names and common variants → standard code.
+     *
      * @link https://pe.usps.com/text/pub28/28apb.htm
      */
     public static function all(): array
@@ -147,5 +148,4 @@ class States
             'AP' => 'AP',
         ];
     }
-
 }

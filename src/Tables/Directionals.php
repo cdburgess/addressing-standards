@@ -8,6 +8,7 @@ class Directionals
 
     /**
      * Standard geographic directionals (Pub 28 §233 / Appendix B).
+     *
      * @link https://pe.usps.com/text/pub28/28apb.htm
      */
     public static function all(): array
